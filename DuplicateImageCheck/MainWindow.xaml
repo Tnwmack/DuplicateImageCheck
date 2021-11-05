@@ -1,0 +1,22 @@
+﻿<Window x:Class="DuplicateImageCheck.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DuplicateImageCheck"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="487" Width="800">
+    <Grid Margin="5,5,5,5">
+        <Button x:Name="browseButton" Content="Choose Folder" HorizontalAlignment="Left" Margin="365,10,0,0" Padding="5,0,5,0" VerticalAlignment="Top" Click="browseButton_Click"/>
+        <TextBox x:Name="folderTextBox" HorizontalAlignment="Left" Margin="10,10,0,0" Text="TextBox" TextWrapping="NoWrap" VerticalAlignment="Top" Width="350" IsReadOnly="True"/>
+        <Button x:Name="startButton" Content="Start" HorizontalAlignment="Left" Margin="10,33,0,0" Padding="5,0,5,0" VerticalAlignment="Top" Click="startButton_Click"/>
+        <Label x:Name="statusLabel" Content="Status: " HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="matchesDataGrid" Margin="0,89,0,0" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header = "File 1" Binding = "{Binding fileName1}" />
+                <DataGridTextColumn Header = "File 2" Binding = "{Binding fileName2}" />
+                <DataGridTextColumn Header = "Similarity" SortDirection="Descending" Binding = "{Binding similarity}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
