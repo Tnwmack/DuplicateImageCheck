@@ -20,14 +20,14 @@ namespace DuplicateImageCheck
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private string folderPath = "";
+		private string _folderPath = "";
 
 		public MainWindow()
 		{
 			InitializeComponent();
 		}
 
-		private void browseButton_Click(object sender, RoutedEventArgs e)
+		private void BrowseButton_Click(object sender, RoutedEventArgs e)
 		{
 			using (var dialog = new Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog())
 			{
@@ -36,18 +36,18 @@ namespace DuplicateImageCheck
 				if(dialog.ShowDialog() == Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Ok)
 				{
 					folderTextBox.Text = dialog.FileName;
-					folderPath = dialog.FileName;
+					_folderPath = dialog.FileName;
 				}
 			}
 		}
 
-		private async void startButton_Click(object sender, RoutedEventArgs e)
+		private async void StartButton_Click(object sender, RoutedEventArgs e)
 		{
 			var scanner = new ImageScanner();
 			scanner.OnStatusChanged += Scanner_OnStatusChanged;
 
-			List<ImageScanner.ImageMatch> matches = await scanner.Process(folderPath, 80.0);
-			matches.Sort((a, b) => (int)(b.similarity - a.similarity));
+			List<ImageScanner.ImageMatch> matches = await scanner.Process(_folderPath, 80.0);
+			matches.Sort((a, b) => (int)(b.Similarity - a.Similarity));
 			matchesDataGrid.ItemsSource = matches;
 		}
 
@@ -56,7 +56,7 @@ namespace DuplicateImageCheck
 			statusLabel.Dispatcher.Invoke(new Action(() => { statusLabel.Content = "Status: " + status; }));
 		}
 
-		private void matchesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+		private void MatchesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
 		{
 
 		}

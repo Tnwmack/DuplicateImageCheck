@@ -7,15 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="487" Width="800">
     <Grid Margin="5,5,5,5">
-        <Button x:Name="browseButton" Content="Choose Folder" HorizontalAlignment="Left" Margin="365,10,0,0" Padding="5,0,5,0" VerticalAlignment="Top" Click="browseButton_Click"/>
-        <TextBox x:Name="folderTextBox" HorizontalAlignment="Left" Margin="10,10,0,0" Text="TextBox" TextWrapping="NoWrap" VerticalAlignment="Top" Width="350" IsReadOnly="True"/>
-        <Button x:Name="startButton" Content="Start" HorizontalAlignment="Left" Margin="10,33,0,0" Padding="5,0,5,0" VerticalAlignment="Top" Click="startButton_Click"/>
+        <Button x:Name="browseButton" Content="Choose Folder" HorizontalAlignment="Left" Margin="365,10,0,0" Padding="5,0,5,0" VerticalAlignment="Top" Click="BrowseButton_Click"/>
+        <TextBox x:Name="folderTextBox" HorizontalAlignment="Left" Margin="10,10,0,0" Text="Choose a folder to process" TextWrapping="NoWrap" VerticalAlignment="Top" Width="350" IsReadOnly="True"/>
+        <Button x:Name="startButton" Content="Start" HorizontalAlignment="Left" Margin="10,33,0,0" Padding="5,0,5,0" VerticalAlignment="Top" Click="StartButton_Click"/>
         <Label x:Name="statusLabel" Content="Status: " HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
         <DataGrid x:Name="matchesDataGrid" Margin="0,89,0,0" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header = "File 1" Binding = "{Binding fileName1}" />
-                <DataGridTextColumn Header = "File 2" Binding = "{Binding fileName2}" />
-                <DataGridTextColumn Header = "Similarity" SortDirection="Descending" Binding = "{Binding similarity}" />
+                <DataGridTextColumn Header = "File 1" Binding = "{Binding FileName1}" />
+                <DataGridTextColumn Header = "File 2" Binding = "{Binding FileName2}" />
+                <DataGridTextColumn Header = "Similarity" SortDirection="Descending" Binding = "{Binding Similarity}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
