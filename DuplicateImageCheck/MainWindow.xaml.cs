@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
 
 namespace DuplicateImageCheck
 {
@@ -29,15 +29,13 @@ namespace DuplicateImageCheck
 
 		private void BrowseButton_Click(object sender, RoutedEventArgs e)
 		{
-			using (var dialog = new Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog())
-			{
-				dialog.IsFolderPicker = true;
+			using var dialog = new Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog();
+			dialog.IsFolderPicker = true;
 
-				if(dialog.ShowDialog() == Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Ok)
-				{
-					folderTextBox.Text = dialog.FileName;
-					_folderPath = dialog.FileName;
-				}
+			if (dialog.ShowDialog() == Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Ok)
+			{
+				folderTextBox.Text = dialog.FileName;
+				_folderPath = dialog.FileName;
 			}
 		}
 
@@ -47,7 +45,7 @@ namespace DuplicateImageCheck
 			scanner.OnStatusChanged += Scanner_OnStatusChanged;
 
 			List<ImageScanner.ImageMatch> matches = await scanner.Process(_folderPath, 80.0);
-			matches.Sort((a, b) => (int)(b.Similarity - a.Similarity));
+			matches.Sort((a, b) => (int) (b.Similarity - a.Similarity));
 			matchesDataGrid.ItemsSource = matches;
 		}
 
@@ -59,6 +57,19 @@ namespace DuplicateImageCheck
 		private void MatchesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
 		{
 
+		}
+
+		private void DataGridHyperlinkColumn_Click(object sender, RoutedEventArgs e)
+		{
+			if (e.Source is Hyperlink link)
+			{
+				var startInfo = new System.Diagnostics.ProcessStartInfo(Path.Combine(_folderPath, link.NavigateUri.OriginalString))
+				{
+					UseShellExecute = true
+				};
+
+				System.Diagnostics.Process.Start(startInfo);
+			}
 		}
 	}
 }

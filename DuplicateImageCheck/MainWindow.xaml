@@ -13,8 +13,20 @@
         <Label x:Name="statusLabel" Content="Status: " HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
         <DataGrid x:Name="matchesDataGrid" Margin="0,89,0,0" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header = "File 1" Binding = "{Binding FileName1}" />
-                <DataGridTextColumn Header = "File 2" Binding = "{Binding FileName2}" />
+                <DataGridHyperlinkColumn Header="File 1" Binding="{Binding FileName1}" ContentBinding="{Binding FileName1}" >
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DataGridHyperlinkColumn_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+                <DataGridHyperlinkColumn Header="File 2" Binding="{Binding FileName2}" ContentBinding="{Binding FileName2}" >
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DataGridHyperlinkColumn_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
                 <DataGridTextColumn Header = "Similarity" SortDirection="Descending" Binding = "{Binding Similarity}" />
             </DataGrid.Columns>
         </DataGrid>
